@@ -1,0 +1,227 @@
+@import 'bootstrap';
+@import '../font/date-picker.css';
+// --------------------------------------------------
+// Flexbox LESS mixins
+// The spec: http://www.w3.org/TR/css3-flexbox
+// --------------------------------------------------
+
+// Flexbox display
+// flex or inline-flex
+.flex-display(@display: flex) {
+  display: ~"-webkit-@{display}";
+  display: ~"-moz-@{display}";
+  display: ~"-ms-@{display}box"; // IE10 uses -ms-flexbox
+  display: ~"-ms-@{display}"; // IE11
+  display: @display;
+}
+
+// Flex Flow Direction
+// - applies to: flex containers
+// row | row-reverse | column | column-reverse
+.flex-direction(@direction: row) {
+  -webkit-flex-direction: @direction;
+     -moz-flex-direction: @direction;
+      -ms-flex-direction: @direction;
+          flex-direction: @direction;
+}
+
+// Axis Alignment
+// - applies to: flex containers
+// flex-start | flex-end | center | space-between | space-around 
+.justify-content(@justify: flex-start) {
+  -webkit-justify-content: @justify;
+     -moz-justify-content: @justify;
+      -ms-justify-content: @justify;
+          justify-content: @justify;
+}
+
+
+// User select
+// For selecting text on the page
+.user-select(@select) {
+  -webkit-user-select: @select;
+     -moz-user-select: @select;
+      -ms-user-select: @select; // IE10+
+          user-select: @select;
+}
+
+@black:                 #000;
+@gray:                  #555;
+@white:                 #fff;
+@grayLighter:           #eee;
+@grayOne: #F6F6F6;
+@grayThree: #CCCCCC;
+@primaryBlue: #04A4FF;
+@primaryLightenBlue: #37B6FF;
+
+.pointer(){
+  cursor: pointer;
+}
+
+.date-picker {
+  .value {
+    .pointer();
+  }
+  overflow: visible;
+  height: 1em;
+
+  .picker {
+    position: absolute;
+    z-index: 1000;
+    width: 377px;
+    left: -138px;
+
+    .picker-container {
+      .flex-display();
+      padding: 5px;
+      box-shadow: 5px 5px rgba(0, 0, 0, 0.3);
+      font-size: 12px;
+
+      margin-top: 12px;
+      
+      &.flipped{
+        box-shadow: 5px -5px rgba(0, 0, 0, 0.3);
+        margin-top: 0px;
+        &:before {
+          top: 100%;
+          text-shadow: 5px 1px rgba(0, 0, 0, 0.3);
+        }
+      }
+
+      &:before {
+        font-size: 50px;
+        position: absolute;
+        top: 0;
+        left: ~'calc(50% - 25px)';
+        line-height: 15px;
+        text-shadow: 5px -1px rgba(0, 0, 0, 0.3);
+      }
+
+      .calendar, .selected-date {
+        display: inline-block;
+        color: initial;
+        vertical-align: top;
+      }
+
+      .calendar {
+        border: 1px solid rgba(128, 128, 128, 0.25);
+
+        .month-picker {
+          background-color: rgba(255, 255, 255, 0.8);
+          padding: 7px;
+          text-transform: uppercase;
+          color: @gray;
+
+          .month-btn {
+            float: right;
+            .pointer();
+            .user-select(none);
+
+            &:before {
+              font-size: 18px;
+              padding: 5px;
+            }
+
+            &:hover {
+              color: @black;
+            }
+          }
+        }
+
+        .dates {
+          background-color: @white;
+          text-align: center;
+
+          td {
+            border: 1px solid @white;
+          }
+
+          thead {
+            td {
+              padding: 0 8px;
+              line-height: 1.5em
+            }
+          }
+
+          tbody {
+            td {
+              .pointer();
+              padding: 8px;
+              min-width: 35px;
+
+              &.disabled {
+                cursor: not-allowed;
+                &.active {
+                  background-color: darken(@grayLighter, 20%);
+                  color: @white;
+                }
+                &.inactive {
+                  background-color: darken(@grayOne, 10%);
+                  color: @white;
+                }
+              }
+              &.active {
+                background-color: @grayLighter;
+                color: @gray;
+              }
+              &.inactive {
+                background-color: @grayOne;
+                color: @grayThree;
+              }
+              &.today {
+                outline-offset: -2px;
+                outline: 2px groove @gray;
+              }
+              &.current {
+                outline-offset: -2px;
+                outline: 2px groove @primaryBlue;
+                background-color: @primaryLightenBlue;
+                color: @white;
+              }
+              &:not(.current):not(.disabled):hover {
+                background-color: @black;
+                color: @white;
+              }
+            }
+          }
+        }
+      }
+
+      .selected-date {
+        .flex-display();
+        .flex-direction(column);
+        .justify-content(space-between);
+        margin-left: 5px;
+        color: @white;
+        text-align: center;
+
+        .title {
+          line-height: 2.5em;
+          background-color: rgba(0, 0, 0, 0.25);
+          color: @white;
+        }
+
+        .date {
+          text-shadow: 3px 1px rgba(100,100,100, 0.6);
+          .day-week {
+            text-transform: uppercase;
+          }
+
+          .day-month {
+            font-size: 70px;
+            line-height: 65px;
+          }
+
+          .month {
+            text-transform: uppercase;
+          }
+        }
+
+        .btn-done {
+          background-color: @gray;
+        }
+      }
+      
+    }
+  }
+}

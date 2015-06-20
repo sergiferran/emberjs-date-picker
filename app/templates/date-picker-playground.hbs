@@ -1,0 +1,56 @@
+<style>
+  .m-t-100 {
+    margin-top: 100px;
+  }
+</style>
+<div class="row">
+
+  <div class="col-xs-12">
+    Single Date Picker with today as a default date and no limits
+  </div>
+  <div class="col-xs-10 col-xs-offset-2">
+      {{date-picker value="today" color='#33A1C5' classNames="standalone-picker"}}
+  </div>
+</div>
+
+<div class="row">
+
+  <div class="col-xs-12">
+    Single Date Picker with 2015/20/07 as a default string value and format the output and no limits
+  </div>
+  <div class="col-xs-10 col-xs-offset-2">
+      {{date-picker value="2015/07/20" formatIn="YYYY/MM/DD" formatOut="dddd, MMM DD of YY" color='#33A1C5' classNames="standalone-picker"}}
+  </div>
+</div>
+
+<div class="row">
+
+  <div class="col-xs-12">
+    One Date Picker with today as a default date and 5 days limits. Format is DD/MM/YYY
+  </div>
+  <div class="col-xs-10 col-xs-offset-2">
+      {{date-picker value="today" formatOut="DD/MM/YYYY" minValue=minValue1 maxValue=maxValue1 color='#922' classNames="standalone-picker"}}
+  </div>
+</div>
+
+<div class="row">
+
+  <div class="col-xs-12">
+    Left Date Picker: first day of current month as a default date and max limit is the right date picker value
+    Right Date Picker: last day of next month as a default date and min limit is the left date picker value
+  </div>
+  <div class="col-xs-10 col-xs-offset-2">
+      {{date-picker value=minValue2 maxValue=maxValue2 color='#292' classNames="standalone-picker"}}
+      {{date-picker value=maxValue2 minValue=minValue2 color='#229' classNames="standalone-picker"}}
+  </div>
+</div>
+
+<div class="row">
+
+  <div class="col-xs-12 m-t-100">
+    Single Date Picker with today as a default date and no limits but appearing on top
+  </div>
+  <div class="col-xs-10 col-xs-offset-2">
+      {{date-picker value="today" color='#33A1C5' classNames="standalone-picker" isFlipped=true}}
+  </div>
+</div>

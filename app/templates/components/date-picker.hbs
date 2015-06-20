@@ -1,0 +1,52 @@
+<div {{bind-attr class=":date-picker"}}>
+  {{#unless isFlipped}}
+    <span {{action 'switchPicker'}} class="value">{{valueFormatted}}</span>
+  {{/unless}}
+  <div {{bind-attr class=":picker isPickerVisible::hidden"}}>
+    <div {{bind-attr class=":picker-container isFlipped:flipped isFlipped:icon-triangle-down:icon-triangle-up"}}>
+      <div class="calendar">
+        <div class="month-picker">
+          {{monthPicker}}
+          <span {{action 'nextMonth'}} class="month-btn icon-triangle-right"></span>
+          <span {{action 'prevMonth'}} class="month-btn icon-triangle-left"></span>
+        </div>
+        <table class="dates">
+          <thead>
+            <tr>
+              {{#each weekday in weekdays}}
+                <td>{{weekday}}</td>
+              {{/each}}
+            </tr>
+          </thead>
+          <tbody>
+            {{#each week in weeks}}
+              <tr>
+              {{#each day in week}}
+                <td {{bind-attr class=":picker-day day.disabled:disabled day.active:active:inactive day.today:today day.current:current"}} {{action 'changeDay' day}}>{{day.day}}</td>
+              {{/each}}
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="selected-date">
+        <div class="title">Selected Date</div>
+
+        <div class="date">
+          <div class="day-week">{{dayWeekFormatted}}</div>
+          <div class="day-month">{{dayMonthFormatted}}</div>
+          <div class="month">{{monthFormatted}}</div>
+        </div>
+
+        <div>
+          <button type="button" class="btn btn-done btn-sm" {{action 'closePicker'}}>Done</button>
+          <button type="button" class="btn btn-default btn-sm" {{action 'cancelPicker'}}>Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{#if isFlipped}}
+    <span {{action 'switchPicker'}} class="value">{{valueFormatted}}</span>
+  {{/if}}
+</div>
