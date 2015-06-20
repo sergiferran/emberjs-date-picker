@@ -2,7 +2,7 @@
 
 With this component you'll be able to build a date picker in ember binding values
 
-[Live demo](http://sergiferran.webcindario.com/async-button/index.html)
+[Live demo](http://sergiferran.webcindario.com/date-picker/index.html)
 
 ## Sample Code
 
